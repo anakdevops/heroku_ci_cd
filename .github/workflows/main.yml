@@ -33,10 +33,3 @@ jobs:
           heroku_api_key: "HRKU-e2e5f067-6e31-464a-8542-4d8da65f2806"
           heroku_app_name: "nodeappjsdevops"
           heroku_email: "anakdevops93@gmail.com"
-
-      - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          git remote add heroku https://git.heroku.com/nodejsappanakdevops.git
-          git push heroku main
