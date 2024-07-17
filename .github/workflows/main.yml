@@ -24,7 +24,7 @@ jobs:
 
       - name: Deploy to Heroku
         env:
-          HEROKU_API_KEY: "HRKU-fd8b6546-35c2-4c76-a739-9876aab035d0"
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY}}
         run: |
           # Authenticate to Heroku
           echo $HEROKU_API_KEY | heroku auth:token
