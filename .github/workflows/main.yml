@@ -6,9 +6,9 @@ on:
       - main
 
 jobs:
-    deploying:
+  deploying:
      runs-on: ubuntu-latest
-    steps:
+     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
