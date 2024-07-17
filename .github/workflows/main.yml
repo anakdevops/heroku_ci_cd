@@ -33,7 +33,7 @@ jobs:
           heroku auth:whoami
           
           # Add Heroku remote
-          git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/nodejsanakdevops.git
+          git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/anakdevopsheroku.git
           
           # Push to Heroku
           git push heroku main
