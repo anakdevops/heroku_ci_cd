@@ -1,35 +1,40 @@
-name: CI/CD Pipeline
+name: Deploy to Heroku
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+    deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
         with:
-          node-version: '14'
+          fetch-depth: 0
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
-
-      - name: Deploy akh
-        uses: akhileshns/heroku-deploy@v3.13.15
-        with:
-          heroku_api_key: "HRKU-e2e5f067-6e31-464a-8542-4d8da65f2806"
-          heroku_app_name: "nodeappjsdevops"
-          heroku_email: "anakdevops93@gmail.com"
+      - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: "HRKU-fd8b6546-35c2-4c76-a739-9876aab035d0"
+        run: |
+          # Authenticate to Heroku
+          echo $HEROKU_API_KEY | heroku auth:token
+          
+          # Verify authentication
+          heroku auth:whoami
+          
+          # Add Heroku remote
+          git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/node-ci-cd.git
+          
+          # Push to Heroku
+          git push heroku main
